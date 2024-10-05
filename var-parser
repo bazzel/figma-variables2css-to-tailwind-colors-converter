@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+#
+require 'json'
+
+input_file = ARGV[0]
+
+if input_file.nil? || input_file == '-h' || input_file == '--help'
+  puts "Usage:  ./var-parser <input_file>"
+  exit
+end
+
+json = JSON.parse(File.read(input_file))
+colors = {}
+output_file = 'colors.js'
+
+json.first['values'].each do |value|
+  mode = value['mode']['name']
+  value['color'].each do |color|
+    color_name = color['name'].gsub('/', '-').downcase
+    colors[color_name] ||= {}
+    
+    colors[color_name][mode] = color['value']
+  end
+end
+
+File.open(output_file, 'w') do |file|
+  file.write("const colors = #{{ colors: colors }.to_json};\n")
+  file.write("export default colors;\n")
+end
+
+puts <<~NEXT_STEP
+
+File #{output_file} created.
+
+Copy this file to the folder where tailwind.config.js is located and import it in the file:
+
+```
+const myColors = require(./colors);
+
+module.exports = {
+  theme: {
+    colors: kabisaColors.colors,
+  }
+}
+```
+
+NEXT_STEP
