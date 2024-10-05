@@ -4,7 +4,7 @@ I created this repo to add the missing link between defining color schemes in Fi
 
 - not too many manual work or adjustments should be required 😅,
 - in Figma, colors are defined as variables so we can have modes for [light and dark color themes](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme),
-- we use the [tailwind-mode-aware-colors](https://github.com/JavierM42/tailwind-mode-aware-colors) plugin to define the colors in Tailwind - this will automatically 'generate dynamic colors that will automatically switch between light and dark mode variants'
+- we use the [tailwind-mode-aware-colors](https://github.com/JavierM42/tailwind-mode-aware-colors) plugin to define the colors in Tailwind - this will automatically 'generate dynamic colors that will automatically switch between light and dark mode variants' so we don't need to add separate classes (e.g. `dark:bg-primary-400`) for dark mode.
 
 All this is possible with Figma plugins, however I didn't succeed in generating a `tailwind.config.js` with colors structured [as described](https://github.com/JavierM42/tailwind-mode-aware-colors?tab=readme-ov-file#tailwindconfigjs) by the tailwind-mode-aware-colors plugin. So I wrote a simple script to accomplish this.
 
@@ -41,6 +41,7 @@ To run this script successfully, you need to define your colors as variables in 
 - Transform the file's content that we can use in Tailwind:
 
 ```bash
+$ cd figma-variables2css-to-tailwind-colors-converter
 $ var-parser ./export.json
 ```
 

@@ -2,10 +2,18 @@
 #
 require 'json'
 
+FURTHER_INSTRUCTIONS = 'See https://github.com/bazzel/figma-variables2css-to-tailwind-colors-converter?tab=readme-ov-file#running for further instructions. '
+
 input_file = ARGV[0]
 
 if input_file.nil? || input_file == '-h' || input_file == '--help'
-  puts "Usage:  ./var-parser <input_file>"
+  puts <<~USAGE
+
+  Usage:  ./var-parser <input_file>
+
+  #{FURTHER_INSTRUCTIONS}
+
+  USAGE
   exit
 end
 
@@ -32,16 +40,6 @@ puts <<~NEXT_STEP
 
 File #{output_file} created.
 
-Copy this file to the folder where tailwind.config.js is located and import it in the file:
-
-```
-const myColors = require(./colors);
-
-module.exports = {
-  theme: {
-    colors: kabisaColors.colors,
-  }
-}
-```
+#{FURTHER_INSTRUCTIONS}
 
 NEXT_STEP
