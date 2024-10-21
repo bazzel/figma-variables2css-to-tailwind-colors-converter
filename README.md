@@ -42,7 +42,7 @@ To run this script successfully, you need to define your colors as variables in 
 
 ```bash
 $ cd figma-variables2css-to-tailwind-colors-converter
-$ var-parser ./export.json
+$ ./var-parser ./export.json
 ```
 
 - You now have a file `colors.js`. Move this file to the same folder where `tailwind.config.js` is located.
